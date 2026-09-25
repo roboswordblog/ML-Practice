@@ -26,9 +26,12 @@ categories = {
 }
 
 def productClean(x):
-  return categories[x]
+  return float(categories[x])
   
 X = X.apply(productClean)  
+
+X = torch.FloatTensor(X)
+y = torch.LongTensor(y)
 
 class Model(nn.Module):
     def __init__(self):
@@ -42,3 +45,33 @@ class Model(nn.Module):
         x = torch.relu(self.fc2(x))
         x = self.out(x)
         return x
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
+torch.manual_seed(41)
+model = Model()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+epochs = 1500
+
+for i in range(epochs):
+    y_pred = model(X_train)
+    loss = criterion(y_pred, y_train)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    if i % 10 == 0:
+        predictions = torch.argmax(y_pred, dim=1)
+        accuracy = (predictions == y_train).float().mean()
+        print(accuracy)
+        
+with torch.no_grad():
+    model.eval()
+    test_outputs = model(X_test)
+    predictions = torch.argmax(test_outputs, dim=1)
+    accuracy = (predictions == y_test).float().mean()
+    print(f"Test Accuracy: {accuracy.item():.4f}")
+
+with torch.no_grad():
+    model.eval()
+
