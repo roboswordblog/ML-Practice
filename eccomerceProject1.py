@@ -10,13 +10,19 @@ X = df["product_weight"]
 y = df["product_category"]
 
 categories = {
-  "":  0,
-  "": 1,
-  "": 2,
-  "": 3,
-  "": 4,
-  "": 5,
-  "": 6,
+  "Home & Kitchen":  0,
+  "Beauty": 1,
+  "Toys": 2,
+  "Grocery": 3,
+  "Electronics": 4,
+  "Health & Personal Care": 5,
+  "Automotive": 6,
+  "Office Supplies": 7,
+  "Books":8,
+  "Sports & Fitness": 9,
+  "Fashion": 10,
+  "Pet Supplies": 11,
+    
 }
 
 def productClean(x):
@@ -34,7 +40,5 @@ class Model(nn.Module):
     def forward(self, x):
         x = torch.relu(self.fc1(x))
         x = torch.relu(self.fc2(x))
-        x = torch.relu(self.fc3(x))
-        x = torch.relu(self.fc4(x))
         x = self.out(x)
         return x
