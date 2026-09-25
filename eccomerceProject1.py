@@ -3,8 +3,9 @@ import numpy as np
 import torch
 import torch.nn
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 
-df = pd.load_csv("data.csv")
+df = pd.read_csv("/kaggle/input/datasets/datascikhan/e-commerce-delivery-and-shipping-data-2026/E-commerce_Delivery_Shipping_Data_2026.csv.csv")
 
 X = df["product_weight"]
 y = df["product_category"]
