@@ -29,7 +29,10 @@ categories = {
 def productClean(x):
   return float(categories[x])
   
-X = X.apply(productClean)  
+y = y.apply(productClean)  
+
+x2 = X
+y2 = y
 
 X = torch.FloatTensor(X)
 y = torch.LongTensor(y)
@@ -39,7 +42,7 @@ class Model(nn.Module):
         super().__init__()
         self.fc1 = nn.Linear(1, 16)
         self.fc2 = nn.Linear(16, 32)
-        self.out = nn.Linear(32, 6)
+        self.out = nn.Linear(32, 11)
 
     def forward(self, x):
         x = torch.relu(self.fc1(x))
