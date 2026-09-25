@@ -5,7 +5,7 @@ import torch.nn
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-df = pd.read_csv("/kaggle/input/datasets/datascikhan/e-commerce-delivery-and-shipping-data-2026/E-commerce_Delivery_Shipping_Data_2026.csv.csv")
+df = pd.read_csv("/kaggle/input/datasets/datascikhan/e-commerce-delivery-and-shipping-data-2026/E-commerce_Delivery_Shipping_Data_2026.csv")
 
 X = df["product_weight"]
 y = df["product_category"]
@@ -78,4 +78,3 @@ with torch.no_grad():
 
 with torch.no_grad():
     model.eval()
-
